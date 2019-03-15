@@ -38,7 +38,7 @@ mvn spring-boot:run
 
 The rabbitmq: component allows you produce and consume messages from RabbitMQ instances.
 
-Maven users will need to add the following dependency to their 'pom.xml' for this component:
+Maven users will need to add the following dependency to their `pom.xml` for this component:
 
 ----
 <dependency>
@@ -63,7 +63,7 @@ When using Spring Boot make sure to use the following Maven dependency to have s
 
 ==== Using connection factory
 
-To connect to RabbitMQ you can setup a 'ConnectionFactory' (same as with JMS) with the login details such as:
+To connect to RabbitMQ you can setup a `ConnectionFactory` (same as with JMS) with the login details such as:
 
 ----
 <bean id="rabbitConnectionFactory" class="com.rabbitmq.client.ConnectionFactory">
@@ -93,14 +93,14 @@ From Camel 2.21 onwards the ConnectionFactory is auto-detected by default, so yo
 </camelContext>
 ----
 
-===== Issue when routing between exchanges (in 'Camel 2.20.x' or older)
+===== Issue when routing between exchanges (in `Camel 2.20.x` or older)
 If you for example want to route messages from one Rabbit exchange to another as shown in the example below with foo → bar:
 ----
 from("rabbitmq:foo")
   .to("rabbitmq:bar")
 ----
 
-Then beware that Camel will route the message to itself, eg 'foo' → 'foo'. So why is that? This is because the consumer that receives the message (eg from) provides the message header 'rabbitmq.EXCHANGE_NAME' with the name of the exchange, eg foo. And when the Camel producer is sending the message to bar then the header 'rabbitmq.EXCHANGE_NAME' will override this and instead send the message to foo.
+Then beware that Camel will route the message to itself, eg `foo` → `foo`. So why is that? This is because the consumer that receives the message (eg from) provides the message header `rabbitmq.EXCHANGE_NAME` with the name of the exchange, eg foo. And when the Camel producer is sending the message to bar then the header `rabbitmq.EXCHANGE_NAME` will override this and instead send the message to foo.
 
 To avoid this you need to either:
 - Remove the header:
@@ -115,7 +115,7 @@ from("rabbitmq:foo")
   .to("rabbitmq:bar?bridgeEndpoint=true")
 ----
 
-From Camel 2.21 onwards this has been improved so you can easily route between exchanges. The header 'rabbitmq.EXCHANGE_NAME' is not longer used by the producer to override the destination exchange. Instead a new header 'rabbitmq.EXCHANGE_OVERRIDE_NAME' can be used to send to a different exchange. For example to send to cheese exchange you can do
+From Camel 2.21 onwards this has been improved so you can easily route between exchanges. The header `rabbitmq.EXCHANGE_NAME` is not longer used by the producer to override the destination exchange. Instead a new header `rabbitmq.EXCHANGE_OVERRIDE_NAME` can be used to send to a different exchange. For example to send to cheese exchange you can do
 ----
 from("rabbitmq:foo")
   .setHeader("rabbitmq.EXCHANGE_OVERRIDE_NAME", constant("cheese"))
