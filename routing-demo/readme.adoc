@@ -4,7 +4,7 @@
 :toc-title: Table of Content
 :numbered:
 
-= Building JAX-WS Web Services with Apache CXF
+= Spring-boot micro service with Camel Route, RabbitMQ and MongoDB
 
 toc::[]
 
